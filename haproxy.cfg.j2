@@ -33,18 +33,10 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 	
+	
 
 
-listen firstbalance
-        bind *:{{ haproxy_port }}
-        mode http
-        stats enable
-        balance roundrobin
-        option httpclose
-        option forwardfor
-{% for devservers in groups["webservers"] %}
-        server {{ devservers }} {{ hostvars[devservers]["ansible_default_ipv4"]["address"] }} check port 80
-{% endfor %}       
+     
 
     
 
