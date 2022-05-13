@@ -24,8 +24,8 @@
 
     - name: copy the code
       copy: 
-        src: application.py 
-        dest: /application.py
+        src: application2.py 
+        dest: /application2.py
 
     - name: run the flask app
       shell: |
