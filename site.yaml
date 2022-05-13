@@ -29,7 +29,7 @@
 
     - name: run the flask app
       shell: |
-        nohup python3 application.py > log.txt 2>&1 &
+        nohup python3 application2.py > log.txt 2>&1 &
 
 
 # haproxy configuration
