@@ -1,6 +1,6 @@
 Host bastionNSO
     User ubuntu
-    HostName <ipaddress>
+    HostName <ip address>
     IdentityFile ~/.ssh/f1
     ForwardAgent yes
     StrictHostKeyChecking no
@@ -12,30 +12,30 @@ Host bastionNSO
 
 Host HAproxy
     User ubuntu
-    HostName <ipaddress>
+    HostName <ip address>
     IdentityFile ~/.ssh/f1
     StrictHostKeyChecking no
     PasswordAuthentication no
 
-Host DevA
+Host devA
     User ubuntu
-    HostName <ipaddress>
+    HostName <ip address>
     IdentityFile ~/.ssh/f1
     ProxyCommand ssh -W %h:%p bastionNSO
     StrictHostKeyChecking no
     PasswordAuthentication no
 
-Host DevB
+Host devB
     User ubuntu
-    HostName <ipaddress>
+    HostName <ip address>
     IdentityFile ~/.ssh/f1
     ProxyCommand ssh -W %h:%p bastionNSO
     StrictHostKeyChecking no
     PasswordAuthentication no
 
-Host DevC
+Host devC
     User ubuntu 
-    HostName <ipaddress>
+    HostName <ip address>
     IdentityFile ~/.ssh/f1
     ProxyCommand ssh -W %h:%p bastionNSO
     StrictHostKeyChecking no
