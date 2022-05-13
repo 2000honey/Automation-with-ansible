@@ -1,1 +1,63 @@
+---
+-
 
+
+  hosts: webservers
+  become: yes
+  gather_facts: yes
+
+  tasks:
+
+    - name: Updating apt cache
+      become: true
+      apt:
+        update_cache: true
+
+    - name: installing pip3
+      become: true
+      apt:
+        name: python3-pip
+        state: latest
+
+    - name: install flask with pip
+      pip: name=flask
+
+    - name: copy the code
+      copy: 
+        src: application.py 
+        dest: /application.py
+
+    - name: run the flask app
+      shell: |
+        nohup python3 application.py > log.txt 2>&1 &
+
+
+# haproxy configuration
+
+- hosts: all
+  gather_facts: yes
+- hosts: HAproxy
+  become: yes
+
+  tasks:
+
+    - name: updating apt cache
+      become: true
+      apt:
+        update_cache: true
+
+    - name: install haproxy
+      become: true
+      apt:
+        name: haproxy
+        state: latest
+
+    - name: deploy haproxy configuration
+      template:
+        src: /$PWD/haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+
+    - name: restarting Haproxy
+      service:
+        name: haproxy
+        state: restarted
