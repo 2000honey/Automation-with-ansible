@@ -32,14 +32,12 @@ defaults
 	errorfile 502 /etc/haproxy/errors/502.http
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
+	
+frontend public
+    bind :80
+    default_backend webservers
 
-
-listen firstbalance
-        bind *:80
-        mode http
-        balance roundrobin
-        option httpclose
-        option forwardfor
+backend webservers
 {% for host in groups['webservers'] %}
-    server  {{ host }} {{ hostvars[host]['ansible_env'].SSH_CONNECTION.split(' ')[2] }}:8080
+    server  {{ host }} {{ hostvars[host]['ansible_env'].SSH_CONNECTION.split(' ')[2] }}:80
 {% endfor %}
