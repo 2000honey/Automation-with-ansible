@@ -41,3 +41,9 @@ backend webservers
 {% for host in groups['webservers'] %}
     server  {{ host }} {{ hostvars[host]['ansible_env'].SSH_CONNECTION.split(' ')[2] }}:80
 {% endfor %}
+
+listen stats
+    bind *:8404
+    stats enable
+    stats uri /monito
+    stats refresh 5s
