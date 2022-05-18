@@ -43,7 +43,7 @@ backend webservers
 {% endfor %}
 
 listen stats
-    bind *:8404
+    bind *:80
     stats enable
     stats uri /monito
     stats refresh 5s
